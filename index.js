@@ -4,10 +4,14 @@ class Game2048 {
         this.gridSize = 4;
         this.score = 0;
         this.gameOver = false;
+        if (canvas === null)
+            throw new Error("Canvas ain't available");
         this.canvas = canvas;
         canvas.width = 800;
         canvas.height = 800;
         this.context = this.canvas.getContext("2d");
+        if (this.context === null)
+            throw new Error("Context2d ain't available");
         this.grid = this.createEmptyGrid();
         this.scoreElement = document.getElementById('score');
         this.gameOverElement = document.getElementById('gameOver');
@@ -27,10 +31,14 @@ class Game2048 {
         this.draw();
     }
     updateScore() {
+        if (this.scoreElement === null)
+            throw new Error("Null Element");
         this.scoreElement.innerText = `Score: ${this.score}`;
     }
     endGame() {
         this.gameOver = true;
+        if (this.gameOverElement === null)
+            throw new Error("Null Element");
         this.gameOverElement.style.display = "block";
     }
     createEmptyGrid() {

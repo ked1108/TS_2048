@@ -5,20 +5,22 @@ class Game2048 {
     private grid: number[][];
     private score: number = 0;
     private gameOver: boolean = false;
-    private canvas: HTMLCanvasElement;
-    private context: CanvasRenderingContext2D;
-    private scoreElement: HTMLElement;
-    private gameOverElement: HTMLElement;
+    private canvas: HTMLCanvasElement | null;
+    private context: CanvasRenderingContext2D | null;
+    private scoreElement: HTMLElement | null;
+    private gameOverElement: HTMLElement | null;
 
     constructor(canvas: HTMLCanvasElement) {
+	if(canvas === null) throw new Error("Canvas ain't available");
         this.canvas = canvas;
 	canvas.width = 800;
 	canvas.height = 800;
         this.context = this.canvas.getContext("2d")!;
+	if(this.context === null) throw new Error("Context2d ain't available")
         this.grid = this.createEmptyGrid();
 
-	this.scoreElement = document.getElementById('score');
-        this.gameOverElement = document.getElementById('gameOver');
+	this.scoreElement = document.getElementById('score') as HTMLElement | null;
+        this.gameOverElement = document.getElementById('gameOver') as HTMLElement | null;
 
 	console.log(this.grid);
 	this.updateScore();
@@ -43,11 +45,13 @@ class Game2048 {
     }
 
     private updateScore() {
+	if(this.scoreElement === null) throw new Error("Null Element");
         this.scoreElement.innerText = `Score: ${this.score}`;
     }
 
     private endGame() {
         this.gameOver = true;
+	if(this.gameOverElement === null) throw new Error("Null Element");
         this.gameOverElement.style.display = "block";
     }
 
@@ -118,7 +122,7 @@ class Game2048 {
         }
     }
 
-    private handleKeyPress(event: Event) {
+    private handleKeyPress(event: KeyboardEvent) {
 	console.log(event)
         let moved = false;
         switch (event.key) {
@@ -239,4 +243,4 @@ window.onload = () => {
     const canvas = document.getElementById('game');
     new Game2048(canvas);
 };
-}
+

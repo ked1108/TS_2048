@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048</title>
+  <style>
+    #game {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+    }
+    .score-board {
+	font-family: Arial;
+	font-style: bold;
+	font-size: 40px;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 20px;
+    }
+
+    .game-over {
+	color: red;
+	font-size: 40px;
+	text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="score-board">
+        <span id="score">Score: 0</span>
+  </div>
+
+  <canvas id="game"></canvas>
+
+  <div id="gameOver" class="game-over" style="display: none;">Game Over!</div>
+
+  <script src="index.js"></script>
+</body>
+</html>
